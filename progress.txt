@@ -5,3 +5,12 @@
   - Implemented localStorage-backed memoStorage module (CRUD + UUID ids + timestamps)
   - 17 unit tests covering all CRUD operations, ordering, and persistence (all passing)
   - npm run build succeeds; npm test passes 17/17
+
+2026-07-21 — issue #3 (List view + Create memo)
+  Branch: feature/issue-3-list-create (off feature/issue-2-project-scaffold)
+  PR: https://github.com/hirokihokari/claude-ralph-setup-check/pull/8
+  - MemoList component: renders title + updatedAt per item; empty state when zero memos
+  - CreateMemoForm component: validates title (required, max 100 chars) and body (max 5000 chars)
+  - App.tsx wires state management: loads on mount, refreshes list after create
+  - 15 new component tests (6 MemoList + 9 CreateMemoForm); all 32 tests passing
+  - npm run build succeeds; npm test passes 32/32
