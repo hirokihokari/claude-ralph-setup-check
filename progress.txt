@@ -14,3 +14,12 @@
   - App.tsx wires state management: loads on mount, refreshes list after create
   - 15 new component tests (6 MemoList + 9 CreateMemoForm); all 32 tests passing
   - npm run build succeeds; npm test passes 32/32
+
+2026-07-21 — issue #4 (View memo detail)
+  Branch: feature/issue-4-view-memo-detail (off feature/issue-3-list-create)
+  PR: https://github.com/hirokihokari/claude-ralph-setup-check/pull/9
+  - MemoDetail component: renders full title and body; back button returns to list
+  - MemoList: added onSelect callback; memo items are clickable
+  - App.tsx: selectedMemo state switches between list view and detail view
+  - 6 new tests (5 MemoDetail + 1 MemoList onSelect); all 38 tests passing
+  - npm run build succeeds; npm test passes 38/38
