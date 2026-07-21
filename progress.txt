@@ -23,3 +23,11 @@
   - App.tsx: selectedMemo state switches between list view and detail view
   - 6 new tests (5 MemoDetail + 1 MemoList onSelect); all 38 tests passing
   - npm run build succeeds; npm test passes 38/38
+
+2026-07-21 — issue #5 (Delete memo with confirmation)
+  Branch: feature/issue-5-delete-memo (off feature/issue-4-view-memo-detail)
+  PR: https://github.com/hirokihokari/claude-ralph-setup-check/pull/10
+  - MemoList: added onDelete prop; delete button per item with stopPropagation
+  - App.tsx: handleDelete shows window.confirm before deleteMemo + refreshes list
+  - 3 new tests (delete button renders, onDelete called with id, onSelect not triggered); all 41 passing
+  - npm run build succeeds; npm test passes 41/41
