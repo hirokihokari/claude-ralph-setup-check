@@ -1,0 +1,7 @@
+2026-07-21 — issue #2 (Project scaffold + memo storage module)
+  Branch: feature/issue-2-project-scaffold
+  PR: https://github.com/hirokihokari/claude-ralph-setup-check/pull/7
+  - Scaffolded React + TypeScript SPA with Vite (empty shell page)
+  - Implemented localStorage-backed memoStorage module (CRUD + UUID ids + timestamps)
+  - 17 unit tests covering all CRUD operations, ordering, and persistence (all passing)
+  - npm run build succeeds; npm test passes 17/17
