@@ -31,3 +31,11 @@
   - App.tsx: handleDelete shows window.confirm before deleteMemo + refreshes list
   - 3 new tests (delete button renders, onDelete called with id, onSelect not triggered); all 41 passing
   - npm run build succeeds; npm test passes 41/41
+
+2026-07-21 — issue #6 (Edit memo)
+  Branch: feature/issue-6-edit-memo (off feature/issue-5-delete-memo)
+  PR: https://github.com/hirokihokari/claude-ralph-setup-check/pull/11
+  - MemoDetail: added inline edit mode with title input, body textarea, save and cancel buttons
+  - App.tsx: added handleSave calling updateMemo + refreshes selectedMemo and list
+  - 6 new tests (edit button, edit mode switch, pre-fill, onSave callback, cancel, no edit without onSave); all 47 passing
+  - npm run build succeeds; npm test passes 47/47
