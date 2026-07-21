@@ -42,4 +42,50 @@ describe('MemoDetail', () => {
     render(<MemoDetail memo={makeMemo({ body: '' })} onBack={() => {}} />)
     expect(screen.getByTestId('memo-detail')).toBeDefined()
   })
+
+  it('renders an edit button', () => {
+    render(<MemoDetail memo={makeMemo()} onBack={() => {}} onSave={() => {}} />)
+    expect(screen.getByTestId('edit-button')).toBeDefined()
+  })
+
+  it('switches to edit mode when edit button is clicked', async () => {
+    render(<MemoDetail memo={makeMemo()} onBack={() => {}} onSave={() => {}} />)
+    await userEvent.click(screen.getByTestId('edit-button'))
+    expect(screen.getByTestId('edit-title')).toBeDefined()
+    expect(screen.getByTestId('edit-body')).toBeDefined()
+  })
+
+  it('pre-fills edit fields with current memo values', async () => {
+    const memo = makeMemo({ title: 'My Title', body: 'My Body' })
+    render(<MemoDetail memo={memo} onBack={() => {}} onSave={() => {}} />)
+    await userEvent.click(screen.getByTestId('edit-button'))
+    expect((screen.getByTestId('edit-title') as HTMLInputElement).value).toBe('My Title')
+    expect((screen.getByTestId('edit-body') as HTMLTextAreaElement).value).toBe('My Body')
+  })
+
+  it('calls onSave with updated values when save is clicked', async () => {
+    const onSave = vi.fn()
+    const memo = makeMemo({ id: 'abc', title: 'Old', body: 'Old body' })
+    render(<MemoDetail memo={memo} onBack={() => {}} onSave={onSave} />)
+    await userEvent.click(screen.getByTestId('edit-button'))
+    await userEvent.clear(screen.getByTestId('edit-title'))
+    await userEvent.type(screen.getByTestId('edit-title'), 'New Title')
+    await userEvent.clear(screen.getByTestId('edit-body'))
+    await userEvent.type(screen.getByTestId('edit-body'), 'New body text')
+    await userEvent.click(screen.getByTestId('save-button'))
+    expect(onSave).toHaveBeenCalledWith('abc', 'New Title', 'New body text')
+  })
+
+  it('returns to view mode when cancel is clicked', async () => {
+    render(<MemoDetail memo={makeMemo()} onBack={() => {}} onSave={() => {}} />)
+    await userEvent.click(screen.getByTestId('edit-button'))
+    await userEvent.click(screen.getByTestId('cancel-button'))
+    expect(screen.queryByTestId('edit-title')).toBeNull()
+    expect(screen.getByTestId('edit-button')).toBeDefined()
+  })
+
+  it('does not render edit button when onSave is not provided', () => {
+    render(<MemoDetail memo={makeMemo()} onBack={() => {}} />)
+    expect(screen.queryByTestId('edit-button')).toBeNull()
+  })
 })

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { listMemos, createMemo, getMemo, deleteMemo, type Memo } from './storage/memoStorage'
+import { listMemos, createMemo, getMemo, deleteMemo, updateMemo, type Memo } from './storage/memoStorage'
 import MemoList from './components/MemoList'
 import CreateMemoForm from './components/CreateMemoForm'
 import MemoDetail from './components/MemoDetail'
@@ -26,6 +26,12 @@ function App() {
     setSelectedMemo(null)
   }
 
+  function handleSave(id: string, title: string, body: string) {
+    const updated = updateMemo(id, { title, body })
+    if (updated) setSelectedMemo(updated)
+    setMemos(listMemos())
+  }
+
   function handleDelete(id: string) {
     if (!window.confirm('Delete this memo? This cannot be undone.')) return
     deleteMemo(id)
@@ -36,7 +42,7 @@ function App() {
     return (
       <main>
         <h1>Memo App</h1>
-        <MemoDetail memo={selectedMemo} onBack={handleBack} />
+        <MemoDetail memo={selectedMemo} onBack={handleBack} onSave={handleSave} />
       </main>
     )
   }
